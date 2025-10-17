@@ -7,7 +7,11 @@
 
 import Foundation
 
-final class Service {
+protocol ServiceProtocol {
+    func getCharacters() async throws -> [Char]
+}
+
+final class Service: ServiceProtocol {
     
     func getCharacters() async throws -> [Char] {
         guard let url = URL(string: "https://thronesapi.com/api/v2/Characters") else {

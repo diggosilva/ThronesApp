@@ -19,7 +19,7 @@ class FeedView: UIView {
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        cv.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.identifier)
         return cv
     }()
     

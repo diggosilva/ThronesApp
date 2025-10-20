@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 final class FeedCell: UICollectionViewCell {
     
@@ -63,9 +64,11 @@ final class FeedCell: UICollectionViewCell {
     }
     
     func configure(char: Char) {
+        guard let url = URL(string: char.imageUrl) else { return }
+        
+        charImageView.sd_setImage(with: url)
         charName.text = char.firstName
         self.clipsToBounds = true
         self.layer.cornerRadius = 8
-        self.backgroundColor = .systemIndigo
     }
 }

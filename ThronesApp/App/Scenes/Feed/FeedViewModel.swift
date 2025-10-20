@@ -15,6 +15,8 @@ enum FeedViewControllerStates {
 }
 
 protocol FeedViewModelProtocol: StatefulViewModel where State == FeedViewControllerStates {
+    func numberOfRows() -> Int
+    func character(at indexPath: Int) -> Char
     func fetchCharacters()
 }
 
@@ -32,6 +34,14 @@ final class FeedViewModel: FeedViewModelProtocol {
     
     init(service: ServiceProtocol = Service()) {
         self.service = service
+    }
+    
+    func numberOfRows() -> Int {
+        return listChars.count
+    }
+    
+    func character(at indexPath: Int) -> Char {
+        return listChars[indexPath]
     }
     
     func fetchCharacters() {

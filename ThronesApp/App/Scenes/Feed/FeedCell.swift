@@ -62,7 +62,8 @@ final class FeedCell: UICollectionViewCell {
         ])
     }
     
-    func configure() {
+    func configure(char: Char) {
+        charName.text = char.firstName
         self.clipsToBounds = true
         self.layer.cornerRadius = 8
         self.backgroundColor = .systemIndigo

@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class FeedViewController: UIViewController {
 
     private let feedView = FeedView()
+    private let viewModel = FeedViewModel()
+    private var cancellables = Set<AnyCancellable>()
     
     override func loadView() {
         view = feedView
@@ -19,6 +22,8 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         setNavBar()
         setDataSourcesAndDelegates()
+        handlesStates()
+        viewModel.fetchCharacters()
     }
     
     private func setNavBar() {
@@ -29,16 +34,42 @@ class FeedViewController: UIViewController {
         feedView.collectionView.dataSource = self
         feedView.collectionView.delegate = self
     }
+    
+    private func handlesStates() {
+        viewModel.statePublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] state in
+                switch state {
+                case .loading: self?.showLoadingState()
+                case .loaded: self?.showLoadedState()
+                case .error: self?.showErrorState()
+                }
+            }.store(in: &cancellables)
+    }
+    
+    private func showLoadingState() {
+        print("DEBUG: Loading...")
+    }
+    
+    private func showLoadedState() {
+        print("DEBUG: Loaded!")
+        feedView.collectionView.reloadData()
+    }
+    
+    private func showErrorState() {
+        print("DEBUG: Error!")
+    }
 }
 
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return viewModel.numberOfRows()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.identifier, for: indexPath) as? FeedCell else { return UICollectionViewCell() }
-        cell.configure()
+        let char = viewModel.character(at: indexPath.item)
+        cell.configure(char: char)
         return cell
     }
 }

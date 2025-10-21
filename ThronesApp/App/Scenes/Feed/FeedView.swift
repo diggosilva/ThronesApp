@@ -13,13 +13,14 @@ class FeedView: UIView {
     
     lazy var collectionView: UICollectionView = {
         layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = 10
-        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 8
+        layout.minimumLineSpacing = 8
         layout.itemSize = .zero
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.identifier)
+        cv.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         return cv
     }()
     
@@ -54,7 +55,7 @@ class FeedView: UIView {
         
         guard layout.itemSize == .zero else { return }
         
-        let totalSpacing: CGFloat = layout.minimumInteritemSpacing * 2
+        let totalSpacing: CGFloat = layout.minimumInteritemSpacing * 4
         let availableWidth = bounds.width - totalSpacing
         let cellWidth = availableWidth / 3
         

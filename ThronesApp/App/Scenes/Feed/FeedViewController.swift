@@ -48,16 +48,18 @@ class FeedViewController: UIViewController {
     }
     
     private func showLoadingState() {
-        print("DEBUG: Loading...")
+        feedView.spinner.startAnimating()
     }
     
     private func showLoadedState() {
-        print("DEBUG: Loaded!")
+        feedView.spinner.stopAnimating()
         feedView.collectionView.reloadData()
     }
     
     private func showErrorState() {
-        print("DEBUG: Error!")
+        showCustomAlert(title: "Ops!", message: "Algo deu errado. Tente novamente mais tarde.", buttonTitle: "Ok") {
+            self.feedView.spinner.stopAnimating()
+        }
     }
 }
 

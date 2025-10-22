@@ -20,8 +20,15 @@ class FeedView: UIView {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.identifier)
-        cv.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+        cv.contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8)
         return cv
+    }()
+    
+    lazy var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.color = .label
+        return spinner
     }()
     
     override init(frame: CGRect) {
@@ -38,6 +45,7 @@ class FeedView: UIView {
     
     private func setHierarchy() {
         addSubview(collectionView)
+        addSubview(spinner)
         backgroundColor = .systemBackground
     }
     
@@ -46,7 +54,10 @@ class FeedView: UIView {
             collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            spinner.centerXAnchor.constraint(equalTo: centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
     

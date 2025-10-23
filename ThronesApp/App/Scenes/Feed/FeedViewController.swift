@@ -9,10 +9,17 @@ import UIKit
 import Combine
 
 class FeedViewController: UIViewController {
-
+    
     private let feedView = FeedView()
-    private let viewModel = FeedViewModel()
+    private let viewModel: any FeedViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: any FeedViewModelProtocol = FeedViewModel()) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     override func loadView() {
         view = feedView

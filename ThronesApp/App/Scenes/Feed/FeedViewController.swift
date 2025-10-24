@@ -10,6 +10,7 @@ import Combine
 
 class FeedViewController: UIViewController {
     
+    private let searchController = UISearchController(searchResultsController: nil)
     private let feedView = FeedView()
     private let viewModel: any FeedViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
@@ -35,6 +36,12 @@ class FeedViewController: UIViewController {
     
     private func setNavBar() {
         navigationItem.title = "Game Of Thrones"
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search characters"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     private func setDataSourcesAndDelegates() {
@@ -67,6 +74,14 @@ class FeedViewController: UIViewController {
         showCustomAlert(title: "Ops!", message: "Algo deu errado. Tente novamente mais tarde.", buttonTitle: "Ok") {
             self.feedView.spinner.stopAnimating()
         }
+    }
+}
+
+extension FeedViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        viewModel.searchBarTextDidChange(searchText: searchText)
+        feedView.collectionView.reloadData()
     }
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Char: Codable, Hashable {
+struct Char: Codable {
     let id: Int
     let firstName, lastName, fullName, title: String
     let family, image: String

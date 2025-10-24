@@ -17,12 +17,19 @@ enum FeedViewControllerStates {
 protocol FeedViewModelProtocol: StatefulViewModel where State == FeedViewControllerStates {
     func numberOfRows() -> Int
     func character(at indexPath: Int) -> Char
+    func searchBarTextDidChange(searchText: String)
     func fetchCharacters()
 }
 
 final class FeedViewModel: FeedViewModelProtocol {
     
-    private var listChars: [Char] = []
+    private var chars: [Char] = []
+    private var filteredChars: [Char] = []
+    private var searchText: String = ""
+    
+    var isFiltering: Bool {
+        !searchText.isEmpty
+    }
     
     @Published private var state: FeedViewControllerStates = .loading
     
@@ -37,11 +44,21 @@ final class FeedViewModel: FeedViewModelProtocol {
     }
     
     func numberOfRows() -> Int {
-        return listChars.count
+        return filteredChars.count
     }
     
     func character(at indexPath: Int) -> Char {
-        return listChars[indexPath]
+        return filteredChars[indexPath]
+    }
+    
+    func searchBarTextDidChange(searchText: String) {
+        self.searchText = searchText
+        
+        if searchText.isEmpty {
+            filteredChars = chars
+        } else {
+            filteredChars = chars.filter { $0.fullName.lowercased().contains(searchText.lowercased()) }
+        }
     }
     
     func fetchCharacters() {
@@ -50,11 +67,11 @@ final class FeedViewModel: FeedViewModelProtocol {
         Task { @MainActor in
             do {
                 let char = try await service.getCharacters()
-                listChars.append(contentsOf: char)
+                chars = char
+                filteredChars = chars
                 state = .loaded
             } catch {
                 state = .error
-                throw error
             }
         }
     }

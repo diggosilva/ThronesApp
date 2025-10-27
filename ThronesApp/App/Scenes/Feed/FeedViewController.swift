@@ -85,7 +85,7 @@ extension FeedViewController: UISearchResultsUpdating {
     }
 }
 
-extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension FeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfRows()
     }
@@ -95,5 +95,15 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let char = viewModel.character(at: indexPath.item)
         cell.configure(char: char)
         return cell
+    }
+}
+
+extension FeedViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let char = viewModel.character(at: indexPath.item)
+        let viewModel = DetailsViewModel(char: char)
+        let detailsVC = DetailsViewController(viewModel: viewModel)
+        detailsVC.navigationItem.title = char.fullName
+        navigationController?.pushViewController(detailsVC, animated: true)
     }
 }

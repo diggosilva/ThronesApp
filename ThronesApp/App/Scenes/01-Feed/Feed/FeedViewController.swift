@@ -104,6 +104,7 @@ extension FeedViewController: UICollectionViewDelegate {
         let viewModel = DetailsViewModel(char: char)
         let detailsVC = DetailsViewController(viewModel: viewModel)
         detailsVC.navigationItem.title = char.fullName
+        detailsVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(detailsVC, animated: true)
     }
 }

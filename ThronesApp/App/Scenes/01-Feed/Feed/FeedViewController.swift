@@ -14,6 +14,7 @@ class FeedViewController: UIViewController {
     private let feedView = FeedView()
     private let viewModel: any FeedViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
+    private var shouldShowEmptyState = false
     
     init(viewModel: any FeedViewModelProtocol = FeedViewModel()) {
         self.viewModel = viewModel
@@ -56,6 +57,7 @@ class FeedViewController: UIViewController {
                 switch state {
                 case .loading: self?.showLoadingState()
                 case .loaded: self?.showLoadedState()
+                    self?.setNeedsUpdateContentUnavailableConfiguration()
                 case .error: self?.showErrorState()
                 }
             }.store(in: &cancellables)
@@ -75,12 +77,38 @@ class FeedViewController: UIViewController {
             self.feedView.spinner.stopAnimating()
         }
     }
+    override func updateContentUnavailableConfiguration(using state: UIContentUnavailableConfigurationState) {
+        let isSearching = !(searchController.searchBar.text?.isEmpty ?? true)
+        
+        guard shouldShowEmptyState || isSearching else {
+            contentUnavailableConfiguration = nil
+            return
+        }
+        
+        if viewModel.numberOfRows() == 0 {
+            var config = UIContentUnavailableConfiguration.empty()
+            config.image = .init(systemName: "magnifyingglass")
+            config.text = "Nada encontrado"
+            
+            let text = searchController.searchBar.text ?? ""
+            
+            if text.isEmpty {
+                config.secondaryText = "Nenhum item disponível."
+            } else {
+                config.secondaryText = "Nenhum resultado para '\(text)'"
+            }
+            contentUnavailableConfiguration = config
+        } else {
+            contentUnavailableConfiguration = nil
+        }
+    }
 }
 
 extension FeedViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text else { return }
-        viewModel.searchBarTextDidChange(searchText: searchText)
+        let text = searchController.searchBar.text ?? ""
+        viewModel.searchBarTextDidChange(searchText: text)
+        setNeedsUpdateContentUnavailableConfiguration()
         feedView.collectionView.reloadData()
     }
 }

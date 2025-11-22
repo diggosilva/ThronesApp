@@ -16,7 +16,6 @@ final class FeedCell: UICollectionViewCell {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
-        iv.image = UIImage(systemName: "star")
         iv.clipsToBounds = true
         iv.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         iv.layer.cornerRadius = 8
@@ -29,7 +28,6 @@ final class FeedCell: UICollectionViewCell {
         lbl.backgroundColor = .systemBackground
         lbl.font = .preferredFont(forTextStyle: .footnote)
         lbl.textAlignment = .center
-        lbl.text = "Name Last Name"
         lbl.backgroundColor = .systemRed
         lbl.clipsToBounds = true
         lbl.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]

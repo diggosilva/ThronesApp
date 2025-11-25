@@ -26,6 +26,20 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCharacter()
+        setBarButtonItem()
+    }
+    
+    func setBarButtonItem() {
+        let favoriteBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapFavorite))
+        navigationItem.rightBarButtonItem = favoriteBarButton
+    }
+    
+    @objc private func didTapFavorite() {
+        print("Personagem Adicionado...")
+        let char = viewModel.getCharacter()
+        viewModel.addToFavorites(char: char) { result in
+            print("Adicionou aos favoritos o personagem: \(char.fullName)")
+        }
     }
     
     private func setupCharacter() {

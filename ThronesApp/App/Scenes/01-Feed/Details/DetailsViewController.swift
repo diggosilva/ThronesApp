@@ -35,10 +35,17 @@ class DetailsViewController: UIViewController {
     }
     
     @objc private func didTapFavorite() {
-        print("Personagem Adicionado...")
-        let char = viewModel.getCharacter()
-        viewModel.addToFavorites(char: char) { result in
-            print("Adicionou aos favoritos o personagem: \(char.fullName)")
+        let char = self.viewModel.getCharacter()
+        
+        Task {
+            do {
+                try await viewModel.addToFavorites(char: char)
+                showCustomAlert(title: "Salvo! ✅", message: "Personagem adicionado", buttonTitle: "Ok")
+            } catch DSError.charAlreadyExists {
+                showCustomAlert(title: "Ops! ⚠️", message: "\(char.fullName) já está salvo", buttonTitle: "Ok")
+            } catch {
+                showCustomAlert(title: "Erro! ❌", message: "Não foi possível salvar", buttonTitle: "Ok")
+            }
         }
     }
     

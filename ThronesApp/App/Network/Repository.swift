@@ -9,7 +9,7 @@ import Foundation
 
 protocol RepositoryProtocol {
     func getChars() -> [Char]
-    func saveChar(_ char: Char, completion: @escaping(Result<String, DSError>) -> Void)
+    func saveChar(_ char: Char) async throws
     func saveChars(_ chars: [Char])
 }
 
@@ -27,14 +27,20 @@ class Repository: RepositoryProtocol {
         return []
     }
     
-    func saveChar(_ char: Char, completion: @escaping(Result<String, DSError>) -> Void) {
+    func saveChar(_ char: Char) async throws {
         var savedChars = getChars()
-      
+        
         if savedChars.contains(where: { $0.id == char.id }) {
-            completion(.failure(.charAlreadyExists))
-            return
+            throw DSError.charAlreadyExists
         }
+        
         savedChars.append(char)
+        
+        guard let encoded = try? JSONEncoder().encode(savedChars) else {
+            throw DSError.charAlreadyExists
+        }
+        
+        userDefaults.set(encoded, forKey: keyChar)
     }
     
     func saveChars(_ chars: [Char]) {

@@ -12,7 +12,7 @@ class FavoriteView: UIView {
     lazy var tableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .insetGrouped)
         tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tv.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.identifier)
         return tv
     }()
     

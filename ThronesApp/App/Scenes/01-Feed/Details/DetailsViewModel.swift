@@ -9,7 +9,7 @@ import Foundation
 
 protocol DetailsViewModelProtocol {
     func getCharacter() -> Char
-    func addToFavorites(char: Char, completion: @escaping(Result<String, DSError>) -> Void)
+    func addToFavorites(char: Char) async throws
 }
 
 final class DetailsViewModel: DetailsViewModelProtocol {
@@ -26,16 +26,7 @@ final class DetailsViewModel: DetailsViewModelProtocol {
         return char
     }
     
-    func addToFavorites(char: Char, completion: @escaping(Result<String, DSError>) -> Void) {
-        repository.saveChar(char) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    completion(.success("Saved"))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-        }
+    func addToFavorites(char: Char) async throws {
+        try await repository.saveChar(char)
     }
 }

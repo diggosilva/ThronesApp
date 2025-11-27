@@ -12,6 +12,7 @@ protocol FavoritesViewModelProtocol {
     func numberOfRows() -> Int
     func cellForRow(at index: Int) -> Char
     func loadChars()
+    func saveChars()
     func removeChar(at index: Int)
     func setDelegate(_ delegate: FavoriteViewModelDelegate)
 }

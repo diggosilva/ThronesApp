@@ -57,6 +57,14 @@ extension FavoriteViewController: UITableViewDataSource {
         cell.configure(char: char)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            viewModel.removeChar(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            viewModel.saveChars()
+        }
+    }
 }
 
 extension FavoriteViewController: UITableViewDelegate {

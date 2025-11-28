@@ -33,6 +33,7 @@ class FavoriteViewController: UIViewController {
         super.viewWillAppear(animated)
         viewModel.setDelegate(self)
         viewModel.loadChars()
+        setNeedsUpdateContentUnavailableConfiguration()
     }
     
     private func configureNavigationBar() {
@@ -43,6 +44,18 @@ class FavoriteViewController: UIViewController {
         favoriteView.tableView.dataSource = self
         favoriteView.tableView.delegate = self
         favoriteView.tableView.reloadData()
+    }
+    
+    override func updateContentUnavailableConfiguration(using state: UIContentUnavailableConfigurationState) {
+        if viewModel.numberOfRows() == 0 {
+            var config = UIContentUnavailableConfiguration.empty()
+            config.image = .init(systemName: "star.slash")
+            config.text = "Você ainda não tem personagens favoritos."
+            
+            contentUnavailableConfiguration = config
+        } else {
+            contentUnavailableConfiguration = nil
+        }
     }
 }
 
@@ -63,6 +76,7 @@ extension FavoriteViewController: UITableViewDataSource {
             viewModel.removeChar(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             viewModel.saveChars()
+            setNeedsUpdateContentUnavailableConfiguration()
         }
     }
 }

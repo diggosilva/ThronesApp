@@ -84,6 +84,13 @@ extension FavoriteViewController: UITableViewDataSource {
 extension FavoriteViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let char = viewModel.cellForRow(at: indexPath.row)
+        let viewModel = DetailsViewModel(char: char)
+        let detailsVC = DetailsViewController(viewModel: viewModel)
+        detailsVC.hidesBottomBarWhenPushed = true
+        detailsVC.title = char.fullName
+        navigationController?.pushViewController(detailsVC, animated: true)
     }
 }
 

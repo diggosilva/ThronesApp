@@ -9,4 +9,5 @@ import Foundation
 
 enum DSError: String, Error {
     case charAlreadyExists = "Você já possui esses personagem nos seus favoritos."
+    case unknown = "Ocorreu um erro inesperado."
 }

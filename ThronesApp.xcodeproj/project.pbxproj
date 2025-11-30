@@ -10,7 +10,18 @@
 		92088FE42EA6623A004310F3 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 92088FE32EA6623A004310F3 /* SDWebImage */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		923A99442EDC70E20024B4B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92EF9D102E9FC757009B913B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 92EF9D172E9FC757009B913B;
+			remoteInfo = ThronesApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		923A99402EDC70E10024B4B0 /* ThronesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThronesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92EF9D182E9FC757009B913B /* ThronesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThronesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -25,6 +36,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		923A99412EDC70E10024B4B0 /* ThronesAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ThronesAppTests;
+			sourceTree = "<group>";
+		};
 		92EF9D1A2E9FC757009B913B /* ThronesApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -36,6 +52,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		923A993D2EDC70E10024B4B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		92EF9D152E9FC757009B913B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -51,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				92EF9D1A2E9FC757009B913B /* ThronesApp */,
+				923A99412EDC70E10024B4B0 /* ThronesAppTests */,
 				92EF9D192E9FC757009B913B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				92EF9D182E9FC757009B913B /* ThronesApp.app */,
+				923A99402EDC70E10024B4B0 /* ThronesAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,6 +91,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		923A993F2EDC70E10024B4B0 /* ThronesAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 923A99482EDC70E20024B4B0 /* Build configuration list for PBXNativeTarget "ThronesAppTests" */;
+			buildPhases = (
+				923A993C2EDC70E10024B4B0 /* Sources */,
+				923A993D2EDC70E10024B4B0 /* Frameworks */,
+				923A993E2EDC70E10024B4B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				923A99452EDC70E20024B4B0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				923A99412EDC70E10024B4B0 /* ThronesAppTests */,
+			);
+			name = ThronesAppTests;
+			packageProductDependencies = (
+			);
+			productName = ThronesAppTests;
+			productReference = 923A99402EDC70E10024B4B0 /* ThronesAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		92EF9D172E9FC757009B913B /* ThronesApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92EF9D2B2E9FC758009B913B /* Build configuration list for PBXNativeTarget "ThronesApp" */;
@@ -99,6 +147,10 @@
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
+					923A993F2EDC70E10024B4B0 = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = 92EF9D172E9FC757009B913B;
+					};
 					92EF9D172E9FC757009B913B = {
 						CreatedOnToolsVersion = 26.0.1;
 					};
@@ -122,11 +174,19 @@
 			projectRoot = "";
 			targets = (
 				92EF9D172E9FC757009B913B /* ThronesApp */,
+				923A993F2EDC70E10024B4B0 /* ThronesAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		923A993E2EDC70E10024B4B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		92EF9D162E9FC757009B913B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,6 +197,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		923A993C2EDC70E10024B4B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		92EF9D142E9FC757009B913B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -146,7 +213,57 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		923A99452EDC70E20024B4B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 92EF9D172E9FC757009B913B /* ThronesApp */;
+			targetProxy = 923A99442EDC70E20024B4B0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		923A99462EDC70E20024B4B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 57HYQW6DAG;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.diggosilva.ThronesAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ThronesApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ThronesApp";
+			};
+			name = Debug;
+		};
+		923A99472EDC70E20024B4B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 57HYQW6DAG;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.diggosilva.ThronesAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ThronesApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ThronesApp";
+			};
+			name = Release;
+		};
 		92EF9D2C2E9FC758009B913B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -333,6 +450,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		923A99482EDC70E20024B4B0 /* Build configuration list for PBXNativeTarget "ThronesAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				923A99462EDC70E20024B4B0 /* Debug */,
+				923A99472EDC70E20024B4B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		92EF9D132E9FC757009B913B /* Build configuration list for PBXProject "ThronesApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

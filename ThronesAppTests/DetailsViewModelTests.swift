@@ -9,57 +9,55 @@ import XCTest
 @testable import ThronesApp
 
 final class DetailsViewModelTests: XCTestCase {
-
-    private func makeMockChar() -> Char {
-        return Char(
-            id: 1,
-            firstName: "Jon",
-            lastName: "Snow",
-            fullName: "Jon Snow",
-            title: "King in the North",
-            family: "Stark",
-            image: "jon.png",
-            imageUrl: "https://example.com/jon"
-        )
+    
+    private var mockChar: Char!
+    private var repositoryMock: RepositoryMock!
+    private var sut: DetailsViewModel!
+    
+    override func setUp() {
+        super.setUp()
+        mockChar = makeMockChar()
+        repositoryMock = RepositoryMock()
+        sut = DetailsViewModel(char: mockChar, repository: repositoryMock)
     }
-
-    #warning("Não implementado, esse teste está dando erro e preciso corrigir.")
+    
+    override func tearDown() {
+        mockChar = nil
+        repositoryMock = nil
+        sut = nil
+        super.tearDown()
+    }
+    
+    private func makeMockChar() -> Char {
+        return Char(id: 1, firstName: "Jon", lastName: "Snow", fullName: "Jon Snow", title: "", family: "", image: "", imageUrl: "")
+    }
+    
     // MARK: - Test getCharacter
-//    func test_getCharacter_returnsGivenChar() {
-//        let mockChar = makeMockChar()
-//        let repository = RepositoryMock()
-//        let viewModel = DetailsViewModel(char: mockChar, repository: repository)
-//        let returnedChar = viewModel.getCharacter()
-//
-//        XCTAssertEqual(returnedChar.firstName, mockChar.firstName)
-//    }
-
+    func test_getCharacter_returnsGivenChar() {
+        let returnedChar = sut.getCharacter()
+        
+        XCTAssertEqual(returnedChar.firstName, mockChar.firstName)
+    }
+    
     // MARK: - Test addToFavorites success
     @MainActor
     func test_addToFavorites_callsRepositorySave() async throws {
-        // Given
-        let mockChar = makeMockChar()
-        let repository = RepositoryMock()
-        let viewModel = DetailsViewModel(char: mockChar, repository: repository)
-
-        try await viewModel.addToFavorites(char: mockChar)
-
-        XCTAssertTrue(repository.saveCharCalled, "saveChar deveria ser chamado")
-        XCTAssertEqual(repository.savedChars.count, 1, "Personagem deveria ter sido salvo")
-        XCTAssertEqual(repository.savedChars.first, mockChar)
+        try await sut.addToFavorites(char: mockChar)
+        
+        XCTAssertTrue(repositoryMock.saveCharCalled, "saveChar deveria ser chamado")
+        XCTAssertEqual(repositoryMock.savedChars.count, 1, "Personagem deveria ter sido salvo")
+        XCTAssertEqual(repositoryMock.savedChars.first, mockChar)
     }
-
+    
     // MARK: - Test addToFavorites throws error
     @MainActor
     func test_addToFavorites_throwsError_whenRepositoryFails() async {
-        let mockChar = makeMockChar()
-        let repository = RepositoryMock()
-        repository.shouldThrowOnSave = true
+        repositoryMock.shouldThrowOnSave = true
         
-        let viewModel = DetailsViewModel(char: mockChar, repository: repository)
-
+        let sut = DetailsViewModel(char: mockChar, repository: repositoryMock)
+        
         do {
-            try await viewModel.addToFavorites(char: mockChar)
+            try await sut.addToFavorites(char: mockChar)
             XCTFail("Era esperado lançar erro, mas o método não lançou")
         } catch {
             XCTAssertEqual(error as? DSError, DSError.charAlreadyExists)

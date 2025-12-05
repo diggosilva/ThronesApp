@@ -12,9 +12,9 @@
 A simple iOS application written in Swift, built for practical search controller.
 
 
-| Demo | Details | Favorites |
+| Feed | Details | Favorites |
 | --- | --- | --- |
-| ![Demo](https://github.com/user-attachments/assets/92bf2794-5273-4090-9f48-8dff7348903f) | ![Details](https://github.com/user-attachments/assets/9a4f8c88-a2bf-4023-b865-ebe757c7cbd7) | ![Favorites](https://github.com/user-attachments/assets/7edf8c7c-3ebf-4253-bce7-99df809563a8) |
+| ![Feed](https://github.com/user-attachments/assets/92bf2794-5273-4090-9f48-8dff7348903f) | ![Details](https://github.com/user-attachments/assets/9a4f8c88-a2bf-4023-b865-ebe757c7cbd7) | ![Favorites](https://github.com/user-attachments/assets/7edf8c7c-3ebf-4253-bce7-99df809563a8) |
 
 
 ## Contents
